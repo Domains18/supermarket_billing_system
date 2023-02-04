@@ -45,3 +45,42 @@ void supermarket::AddProduct()
     xz = xz + 1;
 }
 
+void supermarket::ShowProduct()
+{
+    cout << "\n The Item number of thr product: " << itemNo;
+    cout << "\n The name of the product : ";
+    cout << name;
+    cout << "\n The price of the product : " << price;
+    cout << "\n Discount : " << dis;
+}
+
+void supermarket::InputFile()
+{
+    f.open("/home/supermarket_billing_system/Store.txt", ios::out | ios::app);
+    s.AddProduct();
+    f.write((char *)&s, sizeof(supermarket));
+    f.close();
+    cout << "\n\n The Has been created \n";
+}
+
+void supermarket::Display()
+{
+    system("clear");
+    cout << "\n\n\n\t\t Displaying all records!!!\n\n";
+    f.open("home/supermarket_billing_system/Store.txt", ios::in);
+    int flag;
+    flag = 0;
+    while(flag==0)
+    {
+        if(!f.eof()){
+            flag == 0;
+            f.read((char *)&s, sizeof(supermarket));
+            s.ShowProduct();
+        }
+        else
+            flag == 1;
+    }
+    f.close();
+}
+
+
