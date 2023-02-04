@@ -126,3 +126,25 @@ void supermarket::Update(){
         cout << "\n\n Record Not Found";
 }
 
+void supermarket::Delete(){
+    int no;
+    system("clear");
+    cout << "\n\n\n\n\tDelete Record";
+    cout << "\n\nEnter the Item number you want to delete";
+    cin >> no;
+    f.open("home/supermarket_billing_system/Store.txt", ios::in | ios::out);
+    fstream f2;
+    f2.open("home/supermarket_billing_system/Store.txt", ios::out);
+    f.seekg(0, ios::beg);
+    while(f.read((char*)&s, sizeof(supermarket)))
+    {
+        if(s.itemNo!=no){
+            f2.write((char *)&s, sizeof(supermarket));
+        }
+    }
+    f2.close();
+    f.close();
+    remove("home/supermarket_billing_system/Store.txt");
+    rename("home/supermarket_billing_system/Store.txt", "home/supermarket_billing_system/Store.txt");
+    cout << "\n\n\n\tRecord Deleted";
+}
