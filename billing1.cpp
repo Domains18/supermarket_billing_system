@@ -98,3 +98,31 @@ void supermarket::DisplaySpecific(int n)
     if(flag ==0)
         cout << "\n\n\nrecord doesn't exist";
 }
+
+void supermarket::Update(){
+    int no, found;
+    found = 0;
+    system("clear");
+    cout << "\n\n\tTo modify";
+    cout << "\n\n\t Enter The item Number to modify";
+    cin >> no;
+    f.open("home/supermarket_billing_system/Store.txt", ios::in | ios::out);
+    while(f.read((char*)&s, sizeof(supermarket)) && found==0)
+    {
+        if(s.itemNo==no)
+        {
+            s.ShowProduct();
+            cout << "\nEnter The new Details of Product" << endl;
+            s.AddProduct();
+            int pos = 1 * sizeof(s);
+            f.seekp(pos, ios::cur);
+            f.write((char *)&s, sizeof(supermarket));
+            cout << "\n\n\t Record Update";
+            found = 1;
+        }
+    }
+    f.close();
+    if(found==0)
+        cout << "\n\n Record Not Found";
+}
+
