@@ -83,4 +83,18 @@ void supermarket::Display()
     f.close();
 }
 
-
+void supermarket::DisplaySpecific(int n)
+{
+    int flag = 0;
+    f.open("home/supermarket_billing_system/Store.txt", ios::in);
+    while(f.read((char*)&s, sizeof(supermarket))){
+        if(s.itemNo == n){
+            system("clear");
+            s.ShowProduct();
+            flag = 1;
+        }
+    }
+    f.close();
+    if(flag ==0)
+        cout << "\n\n\nrecord doesn't exist";
+}
