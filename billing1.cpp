@@ -148,3 +148,27 @@ void supermarket::Delete(){
     rename("home/supermarket_billing_system/Store.txt", "home/supermarket_billing_system/Store.txt");
     cout << "\n\n\n\tRecord Deleted";
 }
+
+void supermarket::Menu()
+{
+    system("clear");
+    f.open("home/supermarket_billing_system/Store.txt", ios::in);
+    if(!f){
+        cout << "ERROR!! file could not be opened \n\n\n Go to Admin to create file";
+        cout << "\n\n\n Program is closing....";
+        exit(0);
+    }
+    cout << "\n\n\t\tProduct MENU\n\n";
+    cout<<"=======================================\n";
+cout<<"ITEM.NO.\t\tNAME\t\tPRICE\n";
+cout<<"============================================\n";
+
+while(f.read((char*)&s, sizeof(supermarket)))
+{
+        cout << s.itemNo << "\t\t" << s.name << "\t\t" << s.price << endl;
+}
+f.close();
+}
+
+
+
